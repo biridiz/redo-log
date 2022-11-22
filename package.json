@@ -1,0 +1,25 @@
+{
+  "name": "redo-log",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biridiz/redo-log.git"
+  },
+  "keywords": [],
+  "author": "Luiz Roberto Dendena",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/biridiz/redo-log/issues"
+  },
+  "homepage": "https://github.com/biridiz/redo-log#readme",
+  "dependencies": {
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.25.7"
+  }
+}
