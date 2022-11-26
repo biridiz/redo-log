@@ -11,12 +11,13 @@ const CreateTables = async () => {
   const tables = Object.keys(data);
   const fields = [];
   const querys = [];
-  let nameTablesStringQuery = '(';
+  let nameTablesStringQuery;
   for (const table of tables) {
     fields.push(Object.keys(data[table]));
   }
   for (let i=0; i<tables.length; i++) {
-    querys.push(`CREATE TABLE ${tables[i]}`);
+    querys.push(`CREATE TABLE ${tables[i]} `);
+    let nameTablesStringQuery = '(';
     for (let j=0; j<fields[i].length; j++) {
       if (j === 0) {
         nameTablesStringQuery += `${fields[i][j]}`;
@@ -34,12 +35,12 @@ const CreateTables = async () => {
 
 const InsertValues = async () => {
   const tables = Object.keys(data);
-  const querys = [];
-  const values = [];
-  let queryIndex= 0;
-  let valueTablesStringQuery;
 
   for (const table of tables) {
+    const querys = [];
+    const values = [];
+    let queryIndex= 0;
+    let valueTablesStringQuery;
     const fields = Object.keys(data[table]);
     for (const field of fields) {
       values.push(data[table][field])
