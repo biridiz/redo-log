@@ -69,7 +69,7 @@ const InsertValues = async () => {
   }
 }
 
-(async () => {
+module.exports = DB = async () => {
   try {
     await DatabaseConnection();
     await CreateTables();
@@ -78,4 +78,4 @@ const InsertValues = async () => {
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
-})()
+}
