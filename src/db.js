@@ -17,7 +17,7 @@ const CreateTables = async () => {
   }
   for (let i=0; i<tables.length; i++) {
     querys.push(`CREATE TABLE ${tables[i]} `);
-    let nameTablesStringQuery = '(';
+    nameTablesStringQuery = '(';
     for (let j=0; j<fields[i].length; j++) {
       if (j === 0) {
         nameTablesStringQuery += `${fields[i][j]}`;
