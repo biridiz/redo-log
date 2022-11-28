@@ -1,5 +1,6 @@
-const { Sequelize } = require('sequelize');
 const data = require('../storage/metadata.json');
+
+const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
 const DatabaseConnection = async () => {
