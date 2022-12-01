@@ -65,8 +65,9 @@ const InsertValues = async () => {
     }
     const [results] = await sequelize.query(`SELECT * FROM ${table};`);
     if (!results?.length) {
-      console.log('Unable to insert values')
+      console.log(`Unable to insert values in ${table}`)
     }
+    console.log(results);
   }
 }
 

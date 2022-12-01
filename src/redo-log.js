@@ -23,10 +23,31 @@ try {
   for (let i=0; i<checkpoints.length; i++) {
     for (let j=0; j<checkpoints[i].length; j++) {
       if (commits.includes(checkpoints[i][j])) {
+        const op = checkpoints[i][j];
         // Econtrou o nome da operação
         // Agora percorre até encontrar qual operação executar,
         // interpreta a linha e atualiza o banco
-        operationsAlreadyPerformed.push(checkpoints[i][j]);
+
+        for (const line of lines) {
+          if (
+            line.includes(op) &&
+            !line.includes('CKPT') &&
+            !line.includes('commit') &&
+            !line.includes('start')
+          ) {
+            const arrayInfos = line.replace(`<${op},`, '').replace('>', '').split(',');
+            const id = arrayInfos[0];
+            const field = arrayInfos[1];
+            const values = arrayInfos.slice(2);
+            console.log(id, field, values);
+            // verificar se o valor do banco é diferente do valor novo
+            // se for, realiza o update
+            // imprime qual operação realizou o redo
+            // e faz o select para verificar que os dados foram atualizados
+          }
+        }
+
+        operationsAlreadyPerformed.push(op);
       }
     }
   }
@@ -47,10 +68,10 @@ try {
     }
   }
 
-  console.log('CKPT', checkpoints);
-  console.log('Commits', commits);
-  console.log('checkpoint lines', checkpointLine);
-  console.log('op executadas', operationsAlreadyPerformed);
+  // console.log('CKPT', checkpoints);
+  // console.log('Commits', commits);
+  // console.log('checkpoint line', checkpointLine);
+  // console.log('op executadas', operationsAlreadyPerformed);
 
 } catch (err) {
   console.error(err);
