@@ -23,9 +23,8 @@ const performedTransation = async (line, op, transationsAlreadyPerformed, sequel
       await sequelize.query(`UPDATE ${table} SET ${field}=${values[1]} WHERE id=${id}`);
     }
     [results] = await sequelize.query(`SELECT ${field} FROM ${table} WHERE id=${id}`);
-    console.log("-----------------------------------------------------------------------------------");
-    console.log(`Transação ${op} realizou o REDO`);
-    console.log(`Campo ${field} com ID=${id} alterou seu valor para ${results[0][field]}`);
+    console.log(`-> Transação ${op} realizou o REDO`);
+    console.log(`-> Campo ${field} com ID=${id} alterou seu valor para ${results[0][field]}`);
     console.log("-----------------------------------------------------------------------------------");
     transationsAlreadyPerformed.push(op);
   }
@@ -78,7 +77,7 @@ module.exports = RedoLog = async (sequelize) => {
         const op = line.replace('<', '').replace('>', '').replace('commit ', '')
         if (!op.includes(transationsAlreadyPerformed)) {
           console.log("-----------------------------------------------------------------------------------");
-          console.log(`Transação ${op} não realizou o REDO`);
+          console.log(`-> Transação ${op} não realizou o REDO`);
           console.log("-----------------------------------------------------------------------------------");
         }
       }
