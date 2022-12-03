@@ -74,8 +74,8 @@ module.exports = RedoLog = async (sequelize) => {
 
     for (const line of lines) {
       if (line.includes('start')) {
-        const op = line.replace('<', '').replace('>', '').replace('commit ', '')
-        if (!op.includes(transationsAlreadyPerformed)) {
+        const op = line.replace('<', '').replace('>', '').replace('start ', '');
+        if (!transationsAlreadyPerformed.includes(op)) {
           console.log("-----------------------------------------------------------------------------------");
           console.log(`-> Transação ${op} não realizou o REDO`);
           console.log("-----------------------------------------------------------------------------------");
