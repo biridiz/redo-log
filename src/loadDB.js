@@ -1,14 +1,11 @@
 const data = require('../storage/metadata.json');
 
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
-
-const DatabaseConnection = async () => {
+const DatabaseConnection = async (sequelize) => {
   await sequelize.authenticate();
   console.log('Connection has been established successfully.');
 }
 
-const CreateTables = async () => {
+const CreateTables = async (sequelize) => {
   const tables = Object.keys(data);
   const fields = [];
   const querys = [];
@@ -34,7 +31,7 @@ const CreateTables = async () => {
   }
 }
 
-const InsertValues = async () => {
+const InsertValues = async (sequelize) => {
   const tables = Object.keys(data);
 
   for (const table of tables) {
@@ -71,11 +68,13 @@ const InsertValues = async () => {
   }
 }
 
-module.exports = DB = async () => {
+module.exports = LoadDB = async (sequelize) => {
   try {
-    await DatabaseConnection();
-    await CreateTables();
-    await InsertValues();
+    console.log('-------------- Inicializando banco de dados e carregando valores ------------------');
+    console.log("-----------------------------------------------------------------------------------");
+    await DatabaseConnection(sequelize);
+    await CreateTables(sequelize);
+    await InsertValues(sequelize);
 
   } catch (error) {
     console.error('Unable to connect to the database:', error);

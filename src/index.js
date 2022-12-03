@@ -1,6 +1,10 @@
-const DB = require('./db');
-// const RedoLog = require('./redo-log');
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');
+
+const LoadDB = require('./loadDB');
+const RedoLog = require('./redo-log');
 
 (async () => {
-  await DB();
+  await LoadDB(sequelize);
+  await RedoLog(sequelize);
 })()
